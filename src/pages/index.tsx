@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import MyForm from "@/components/chatgpt-two";
 import Calculator from "@/components/Calculator";
-import Kubernetes from "@/components/services/kubernetes";
 
 const inter = Inter({ subsets: ["latin"] });
 
