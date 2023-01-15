@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: saiyam911/cost-calculator:sha-6ee3395
+        image: saiyam911/cost-calculator:sha-8f12443
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
