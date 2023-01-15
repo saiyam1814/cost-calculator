@@ -3,6 +3,8 @@ import Select from "../ui/Select";
 import { ChangeEvent } from "react";
 import { ServiceType } from "@/data/services";
 import Input from "../ui/Input";
+import Heading from "../ui/heading";
+import Button from "../ui/Button";
 
 interface ComputeInstanceProps {
   forms: any;
@@ -29,7 +31,7 @@ const ComputeInstanceForm = ({
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg">
       <div className="flex-grow">
-        <h1 className="text-center text-xl">Compute Instance</h1>
+        <Heading>Compute Instance</Heading>
         <Input
           id="numberOfNodes"
           label="Number of Nodes : "
@@ -85,7 +87,7 @@ const ComputeInstanceForm = ({
           </>
         ) : null}
       </div>
-      <button className="inline bg-slate-400 rounded-lg p-1" onClick={() => handleRemoveClick(i)}>Remove</button>
+      <Button onClick={() => handleRemoveClick(i)}>Remove</Button>
     </div>
   );
 };

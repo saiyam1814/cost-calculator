@@ -46,7 +46,6 @@ const Kubernetes = () => {
     else updatedForms[index].cost = "";
     setForms(updatedForms);
   }
-
   function handleSizeChange(
     event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
     index: number,
@@ -125,21 +124,14 @@ const Kubernetes = () => {
     setForms(updatedForms);
     setFormCount(formCount - 1);
   };
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log(forms);
-  };
   return (
     <>
-      <div className="flex justify-center items-center gap-10 mb-4 px-10 py-5 bg-gray-600">
+      <div className="flex justify-center items-center gap-10 mb-4 px-10 py-5 shadow-sm">
         <h1 className="text-2xl p-2 text-white">Civo Cost Calculator</h1>
         <AddMenu onClick={handleAddClick} />
-        {/* <button type="button" onClick={handleSubmit}>
-      Submit
-    </button> */}
       </div>
       <div>
-        <div className="mx-2 sm:mx-10 grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="mx-2 sm:mx-10 grid sm:grid-cols-2 md:grid-cols-3 gap-3 text-white">
           {[...Array(formCount)].map((e, i) => {
             switch (forms[i]?.services as ServiceType) {
               case "Compute Instance":
@@ -206,7 +198,7 @@ const Kubernetes = () => {
           })}
         </div>
       </div>
-      <div className="mx-2 sm:mx-10 mt-5 text-xl text-white bg-gray-700 rounded-lg p-2">
+      <div className="mx-2 pl-3 sm:mx-10 mt-5 text-xl text-white bg-[#163B5D] rounded-lg p-2 border-2">
         <p>
           Total Kubernetes Node Cost : $
           {forms.reduce(
@@ -229,12 +221,15 @@ const Kubernetes = () => {
           )}{" "}
           per month
         </p>
-        <p className="bg-gray-600 p-1 rounded-lg">
+        <p className="bg-[#0F273E] p-2 rounded-lg my-2">
           Total Cost : $
-          {(forms.reduce(
-            (acc, el) => Number(el.cost || 0) * Number(el.numberOfNodes) + acc,
-            0
-          ).toFixed(2))}{" "}
+          {forms
+            .reduce(
+              (acc, el) =>
+                Number(el.cost || 0) * Number(el.numberOfNodes) + acc,
+              0
+            )
+            .toFixed(2)}{" "}
           per month
         </p>
       </div>

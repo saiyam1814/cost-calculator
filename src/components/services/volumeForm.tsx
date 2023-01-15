@@ -3,6 +3,8 @@ import Input from "../ui/Input";
 import Select from "../ui/Select";
 import { ServiceType } from "@/data/services";
 import { ChangeEvent } from "react";
+import Heading from "../ui/heading";
+import Button from "../ui/Button";
 
 interface VolumesProps {
   forms: any;
@@ -25,7 +27,7 @@ const VolumesForm = ({
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg">
       <div className="flex-grow">
-        <h1 className="text-center text-xl">Volumes</h1>
+        <Heading>Volumes</Heading>
         <Select
           id="services"
           label="Select a services:"
@@ -60,12 +62,7 @@ const VolumesForm = ({
           </>
         ) : null}
       </div>
-      <button
-        className="inline bg-slate-400 rounded-lg p-1"
-        onClick={() => handleRemoveClick(i)}
-      >
-        Remove
-      </button>
+      <Button onClick={() => handleRemoveClick(i)}>Remove</Button>
     </div>
   );
 };

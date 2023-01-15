@@ -2,6 +2,8 @@ import { ChangeEvent } from "react";
 import Select from "../ui/Select";
 import { services } from "@/data";
 import Input from "../ui/Input";
+import Heading from "../ui/heading";
+import Button from "../ui/Button";
 
 type LoadBalncerProps = {
   forms: any;
@@ -19,9 +21,9 @@ const LoadBalancerForm = ({
   handleNodes,
 }: LoadBalncerProps) => {
   return (
-    <div className="flex flex-col border-2 p-2 rounded-lg">
+    <div className="flex flex-col border-2 p-2 rounded-lg min-h-[300px]">
       <div className="flex-grow">
-        <h1 className="text-center text-xl">Load Balancer</h1>
+        <Heading>Load Balancer</Heading>
         <Input
           id="numberOfNodes"
           label="Number of Nodes : "
@@ -49,12 +51,7 @@ const LoadBalancerForm = ({
           Cost : ${forms[i].numberOfNodes * 10} per month
         </p>
       </div>
-      <button
-        className="inline bg-slate-400 rounded-lg p-1"
-        onClick={() => handleRemoveClick(i)}
-      >
-        Remove
-      </button>
+      <Button onClick={() => handleRemoveClick(i)}>Remove</Button>
     </div>
   );
 };

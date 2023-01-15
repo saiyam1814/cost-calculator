@@ -11,7 +11,7 @@ export default function AddMenu({
     <div className="ml-auto w-10 text-right">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             Add
             <DownSvg />
           </Menu.Button>
@@ -33,7 +33,7 @@ export default function AddMenu({
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-slate-500 text-white" : "text-gray-900"
+                      active ? "bg-blue-500 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={() => onClick(service)}
                   >
@@ -42,54 +42,6 @@ export default function AddMenu({
                 )}
               </Menu.Item>
               ))}
-              {/* <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? "bg-slate-500 text-white" : "text-gray-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => onClick("Compute Instance")}
-                  >
-                    Compute Instance
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? "bg-slate-500 text-white" : "text-gray-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => onClick("Object Store")}
-                  >
-                    Object Store
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? "bg-slate-500 text-white" : "text-gray-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => onClick("Volumes")}
-                  >
-                    Volumes
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? "bg-slate-500 text-white" : "text-gray-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => onClick("Load balancers")}
-                  >
-                    Load balancers
-                  </button>
-                )}
-              </Menu.Item> */}
             </div>
           </Menu.Items>
         </Transition>
