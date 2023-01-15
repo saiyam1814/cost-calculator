@@ -13,12 +13,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-gray-500 min-h-screen">
-        <h1 className="text-2xl p-2 text-center">Civo Cost Calculator</h1>
+      <main className="bg-gray-500 min-h-screen pb-2">
         <Calculator />
-        {/* <ChatGpt /> */}
-        {/* <MyForm/> */}
-        {/* <Kubernetes /> */}
       </main>
     </>
   );

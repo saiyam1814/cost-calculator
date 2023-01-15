@@ -1,10 +1,10 @@
-import { kubernetes } from "@/data";
+import { computeInstance, services } from "@/data";
 import Select from "../ui/Select";
-import Input from "../ui/Input";
 import { ChangeEvent } from "react";
-import { ServiceType, services } from "@/data/services";
+import { ServiceType } from "@/data/services";
+import Input from "../ui/Input";
 
-interface KubernetusFormProps {
+interface ComputeInstanceProps {
   forms: any;
   i: number;
   handleNodes: (e: ChangeEvent<HTMLInputElement>, i: number) => void;
@@ -18,34 +18,33 @@ interface KubernetusFormProps {
   handleRemoveClick: (i: number) => void;
 }
 
-const KubernetesForm = ({
+const ComputeInstanceForm = ({
   forms,
   i,
   handleNodes,
   handleServiceChange,
-  handleTypeChange,
   handleSizeChange,
   handleRemoveClick,
-}: KubernetusFormProps) => {
+}: ComputeInstanceProps) => {
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg">
       <div className="flex-grow">
-        <h1 className="text-center text-xl">Kubernetes Node</h1>
+        <h1 className="text-center text-xl">Compute Instance</h1>
         <Input
           id="numberOfNodes"
           label="Number of Nodes : "
           type="number"
+          min="1"
+          minLength={1}
           placeholder="Enter the Number of Nodes"
           value={forms[i].numberOfNodes}
           onChange={(e) => handleNodes(e, i)}
-          required
         />
         <Select
-          id="kubernetes"
+          id="services"
           label="Select a services:"
           value={forms[i].services}
           onChange={(e) => handleServiceChange(e, i)}
-          disabled={forms[i].numberOfNodes === ""}
           required
         >
           <option value="">Please select</option>
@@ -55,65 +54,32 @@ const KubernetesForm = ({
             </option>
           ))}
         </Select>
-
         <Select
-          id="types"
-          label="Select a type:"
-          value={forms[i].types}
-          onChange={(e) => handleTypeChange(e, i)}
-          disabled={forms[i].services === ""}
+          id="compute"
+          label="Select a size:"
+          value={forms[i].size}
+          onChange={(e) => handleSizeChange(e, i, "Compute Instance")}
           required
         >
           <option value="">Please select</option>
-          {Object.keys(kubernetes).map((service) => (
+          {Object.keys(computeInstance).map((service) => (
             <option key={service} value={service}>
               {service}
             </option>
           ))}
         </Select>
-
-        <Select
-          id="subtypes"
-          label="Select a subtype :"
-          value={forms[i].size}
-          onChange={(e) => handleSizeChange(e, i, "Kubernetes")}
-          disabled={forms[i].types === ""}
-          required
-        >
-          <option value="a">Please select</option>
-          {forms[i].types !== "" ? (
-            <>
-              {[...Object.keys(kubernetes?.[forms[i].types]?.size)].map(
-                (type, i) => (
-                  <option key={i} value={type}>
-                    {type}
-                  </option>
-                )
-              )}
-            </>
-          ) : null}
-        </Select>
-        {forms[i].services &&
-        forms[i].types &&
-        forms[i].size &&
-        forms[i].size.length > 2 ? (
+        {forms[i].services && forms[i].size.length > 2 ? (
           <>
             <p className="text-white font-semibold text-base">
-              Storage :
-              {kubernetes?.[forms[i]?.types].size[forms[i].size]?.storage}
+              Storage : {computeInstance[forms[i]?.size]?.storage}
             </p>
             <p className="text-white font-semibold text-base">
-              Data Transfer:{" "}
-              {
-                kubernetes?.[forms[i]?.types]?.size?.[forms[i]?.size]
-                  ?.dataTransfer
-              }
+              Data Transfer : {computeInstance[forms[i]?.size]?.dataTransfer}
             </p>
-            <p className="text-white font-semibold text-lg ">
+            <p className="text-white font-semibold text-lg mb-5 ">
               Total Cost : $
-              {Number(
-                kubernetes?.[forms[i]?.types].size[forms[i]?.size]?.cost
-              ) * forms[i].numberOfNodes}{" "}
+              {Number(computeInstance[forms[i]?.size]?.cost) *
+                forms[i].numberOfNodes}{" "}
               per month
             </p>
           </>
@@ -124,4 +90,4 @@ const KubernetesForm = ({
   );
 };
 
-export default KubernetesForm;
+export default ComputeInstanceForm;

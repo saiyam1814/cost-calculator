@@ -3,9 +3,17 @@ import { ComponentPropsWithoutRef } from "react";
 interface InputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   id: string;
+  value: string;
 }
 
-const Input = ({ label, id, className, ...props }: InputProps) => {
+const Input = ({
+  label,
+  id,
+  value,
+  required,
+  className,
+  ...props
+}: InputProps) => {
   return (
     <label
       htmlFor={id}
@@ -15,8 +23,15 @@ const Input = ({ label, id, className, ...props }: InputProps) => {
       <input
         id={id}
         className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${className}`}
+        required={required}
+        value={value}
         {...props}
       />
+      {required && value === "" ? (
+        <p className="text-red-800">This Field is Required</p>
+      ) : Number(value) <= 0 ? (
+        <p className="text-red-800">Number should be Positive.</p>
+      ) : null}
     </label>
   );
 };
