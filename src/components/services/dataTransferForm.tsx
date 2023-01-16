@@ -6,7 +6,7 @@ import { ChangeEvent } from "react";
 import Heading from "../ui/heading";
 import Button from "../ui/Button";
 
-interface DataTransfer {
+interface dataTransfer {
   forms: any;
   i: number;
   handleServiceChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
@@ -17,7 +17,7 @@ interface DataTransfer {
   ) => void;
   handleRemoveClick: (i: number) => void;
 }
-const DataTransferForm = ({
+const dataTransferForm = ({
   forms,
   i,
   handleServiceChange,
@@ -66,4 +66,4 @@ const DataTransferForm = ({
     </div>
   );
 };
-export default DataTransferForm;
+export default dataTransferForm;
