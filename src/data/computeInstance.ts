@@ -8,32 +8,32 @@ type ComputeInstanceType = {
 export const computeInstance: ComputeInstanceType = {
     "Extra Small ( RAM: 1 GB, CPU: 1 Core )": {
         storage: "25 GB NVMe",
-        dataTransfer: "1 TB",
+        dataTransfer: "1",
         cost: "5",
     },
     "Small ( RAM: 2 GB, CPU: 1 Core )": {
         storage: "25 GB NVMe",
-        dataTransfer: "2 TB",
+        dataTransfer: "2",
         cost: "10",
     },
     "Medium ( RAM: 4 GB, CPU: 2 Core )": {
         storage: "50 GB NVMe",
-        dataTransfer: "3 TB",
+        dataTransfer: "3",
         cost: "20",
     },
     "Large ( RAM: 8 GB, CPU: 4 Core )": {
         storage: "100 GB NVMe",
-        dataTransfer: "4 TB",
+        dataTransfer: "4",
         cost: "40",
     },
     "Extra Large ( RAM: 16 GB, CPU: 6 Core )": {
         storage: "150 GB NVMe",
-        dataTransfer: "6 TB",
+        dataTransfer: "6",
         cost: "80",
     },
     "2X Large ( RAM: 32 GB, CPU: 8 Core )": {
         storage: "200 GB NVMe",
-        dataTransfer: "9 TB",
+        dataTransfer: "9",
         cost: "160",
     },
 };

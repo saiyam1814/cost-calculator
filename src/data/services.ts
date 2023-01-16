@@ -5,4 +5,5 @@ export const services = [
   "Object Store",
   "Volumes",
   "Load balancers",
+  "Data Transfer",
 ] as const ;

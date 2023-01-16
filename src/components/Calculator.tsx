@@ -7,7 +7,7 @@ import ComputeInstanceForm from "./services/computeinstance";
 import ObjectStoreForm from "./services/objectStoreForm";
 import VolumesForm from "./services/volumeForm";
 import LoadBalancerForm from "./services/loadBalancerForm";
-
+import DataTransferForm from "./services/dataTransferForm"
 const Kubernetes = () => {
   const [formCount, setFormCount] = useState<number>(1);
   const [forms, setForms] = useState([
@@ -56,9 +56,16 @@ const Kubernetes = () => {
       updatedForms[index].size = Math.trunc(
         Number(event.target.value)
       ).toString();
-    } else {
+    } 
+    else if (service == "Data transfer") {
+      updatedForms[index].size = Math.trunc(
+        Number(event.target.value)
+      ).toString();
+    } 
+    else {
       updatedForms[index].size = event.target.value;
     }
+    
     if (service == "Compute Instance") {
       updatedForms[index].cost = computeInstance?.[event.target.value]?.cost;
     } else if (service === "Kubernetes") {
@@ -72,6 +79,11 @@ const Kubernetes = () => {
       updatedForms[index].cost = objectStore[forms[index].size].cost;
     } else if (service === "Volumes") {
       updatedForms[index].cost = (Number(updatedForms[index].size) * 0.1)
+        .toFixed(2)
+        .toString();
+    }
+    else if (service === "Data Transfer") {
+      updatedForms[index].cost = (Number(updatedForms[index].size) * 0.01)
         .toFixed(2)
         .toString();
     }
@@ -95,6 +107,17 @@ const Kubernetes = () => {
           cost: "0.1",
         },
       ]);
+    else if (type === "Data Transfer")
+      setForms([
+        ...forms,
+        {
+          services: type,
+          types: "",
+          size: "",
+          numberOfNodes: "1",
+          cost: "0.01",
+        },
+      ]);  
     else if (type === "Load balancers")
       setForms([
         ...forms,
@@ -170,6 +193,17 @@ const Kubernetes = () => {
                     handleSizeChange={handleSizeChange}
                   />
                 );
+              case "Data Transfer":
+                return (
+                  <DataTransferForm
+                     i={i}
+                     key={i}
+                     forms={forms}
+                     handleRemoveClick={handleRemoveClick}
+                     handleServiceChange={handleServiceChange}
+                     handleSizeChange={handleSizeChange}
+                    />
+                  );  
               case "Load balancers":
                 return (
                   <LoadBalancerForm
@@ -219,6 +253,33 @@ const Kubernetes = () => {
                 : 0 + acc,
             0
           )}{" "}
+          per month
+        </p>
+        <p>
+          Total Data Transfer : $
+          {forms.reduce(
+            (acc, el) =>
+              el.services === "Data Transfer"
+                ? Number(el.cost || 0) * Number(el.size) + acc
+                : 0 + acc,
+            0
+          ) +
+          forms.reduce(
+            (acc, el) =>
+              el.services === "Compute Instance"
+                ? Number(el.cost || 0) * Number(el.numberOfNodes) + acc
+                : 0 + acc,
+            0
+          ) +
+          forms.reduce(
+            (acc, el) =>
+              el.services === "Kubernetes"
+                ? Number(el.cost || 0) * Number(el.numberOfNodes) + acc
+                : 0 + acc,
+            0
+          )
+          
+          }{" "}
           per month
         </p>
         <p className="bg-[#0F273E] p-2 rounded-lg my-2">
