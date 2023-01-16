@@ -76,7 +76,7 @@ const ComputeInstanceForm = ({
               Storage : {computeInstance[forms[i]?.size]?.storage}
             </p>
             <p className="text-white font-semibold text-base">
-              Data Transfer : ({Number(computeInstance[forms[i]?.size]?.dataTransfer) * forms[i].numberOfNodes }) {" "}TB
+              Data Transfer : {Number(computeInstance[forms[i]?.size]?.dataTransfer) * forms[i].numberOfNodes } {" "}TB
             </p>
             <p className="text-white font-semibold text-lg mb-5 ">
               Total Cost : $

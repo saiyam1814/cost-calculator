@@ -57,7 +57,7 @@ const Kubernetes = () => {
         Number(event.target.value)
       ).toString();
     } 
-    else if (service == "Data transfer") {
+    else if (service == "Data Transfer") {
       updatedForms[index].size = Math.trunc(
         Number(event.target.value)
       ).toString();
@@ -256,30 +256,33 @@ const Kubernetes = () => {
           per month
         </p>
         <p>
+          Total Data Transfer Included: {" "} 
+          {Number(forms.reduce(
+            (acc, el) =>
+              el.services === "Kubernetes"
+                ? Number(
+                  kubernetes?.[el.types]?.size[el.size]?.dataTransfer
+                ) * Number(el.numberOfNodes) + acc
+                : el.services === "Compute Instance" 
+                ? Number(computeInstance[el.size]?.dataTransfer) * Number(el.numberOfNodes) + acc
+                : 0 + acc,
+            0
+          )) 
+          
+          }{" "}
+          TB
+        </p>
+        <p>
           Total Data Transfer : $
           {forms.reduce(
             (acc, el) =>
               el.services === "Data Transfer"
-                ? Number(el.cost || 0) * Number(el.size) + acc
+                ? Number(el.cost || 0)  + acc
                 : 0 + acc,
             0
-          ) +
-          forms.reduce(
-            (acc, el) =>
-              el.services === "Compute Instance"
-                ? Number(el.cost || 0) * Number(el.numberOfNodes) + acc
-                : 0 + acc,
-            0
-          ) +
-          forms.reduce(
-            (acc, el) =>
-              el.services === "Kubernetes"
-                ? Number(el.cost || 0) * Number(el.numberOfNodes) + acc
-                : 0 + acc,
-            0
-          )
+          ) .toFixed(2)}{" "}
           
-          }{" "}
+          {" "}
           per month
         </p>
         <p className="bg-[#0F273E] p-2 rounded-lg my-2">

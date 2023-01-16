@@ -107,8 +107,7 @@ const KubernetesForm = ({
             <p className="text-white font-semibold text-base">
               Data Transfer:{" "}
               {
-                Number(kubernetes?.[forms[i]?.types]?.size?.[forms[i]?.numberOfNodes]
-                  ?.dataTransfer) * forms[i].size
+               Number(kubernetes?.[forms[i]?.types].size[forms[i].size].dataTransfer) * Number(forms[i].numberOfNodes)
               
               }{" "}TB
             </p>

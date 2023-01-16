@@ -6,7 +6,7 @@ import { ChangeEvent } from "react";
 import Heading from "../ui/heading";
 import Button from "../ui/Button";
 
-interface dataTransfer {
+interface DataTransferProps {
   forms: any;
   i: number;
   handleServiceChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
@@ -23,7 +23,7 @@ const dataTransferForm = ({
   handleServiceChange,
   handleSizeChange,
   handleRemoveClick,
-}: VolumesProps) => {
+}: DataTransferProps) => {
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg">
       <div className="flex-grow">
@@ -67,3 +67,4 @@ const dataTransferForm = ({
   );
 };
 export default dataTransferForm;
+﻿
