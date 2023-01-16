@@ -107,9 +107,10 @@ const KubernetesForm = ({
             <p className="text-white font-semibold text-base">
               Data Transfer:{" "}
               {
-                kubernetes?.[forms[i]?.types]?.size?.[forms[i]?.size]
-                  ?.dataTransfer
-              }
+                Number(kubernetes?.[forms[i]?.types]?.size?.[forms[i]?.numberOfNodes]
+                  ?.dataTransfer) * forms[i].size
+              
+              }{" "}TB
             </p>
             <p className="text-white font-semibold text-lg ">
               Total Cost : $
