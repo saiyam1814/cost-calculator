@@ -49,7 +49,7 @@ const dataTransferForm = ({
           min={1}
           max={1000}
           value={forms[i].size}
-          onChange={(e) => handleSizeChange(e, i, "Datatransfer")}
+          onChange={(e) => handleSizeChange(e, i, "Data Transfer")}
         />
         <p className="text-white font-semibold">
           Storage size : {forms[i].size} GB
