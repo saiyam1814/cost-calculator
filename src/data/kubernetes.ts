@@ -1,10 +1,12 @@
+export type kubernetesInstances = "Standard" | "Performance" | "CPU Optimized" | "RAM Optimized"
 type Kubernetestype = {
-    [key: string]: {
+    [key in kubernetesInstances]: {
         size: {
             [key: string]: {
                 storage: string;
+                RAM: number;
                 dataTransfer: string;
-                cost: string;
+                costPerGbRam: number;
             };
         };
     };
@@ -15,23 +17,27 @@ export const kubernetes: Kubernetestype = {
         size: {
             "Extra Small (RAM: 1 GB, CPU: 1 Core)": {
                 storage: "30 GB NVMe",
+                RAM: 1,
                 dataTransfer: "1",
-                cost: "5",
+                costPerGbRam: 5,
             },
             "Small (RAM: 2 GB, CPU: 1 Core)": {
                 storage: "40 GB NVMe",
+                RAM: 2,
                 dataTransfer: "2",
-                cost: "10",
+                costPerGbRam: 5,
             },
             "Medium (RAM: 4 GB, CPU: 2 Core)": {
                 storage: "50 GB NVMe",
+                RAM: 4,
                 dataTransfer: "3",
-                cost: "20",
+                costPerGbRam: 5,
             },
             "Large (RAM: 8 GB, CPU: 4 Core)": {
                 storage: "60 GB NVMe",
+                RAM: 8,
                 dataTransfer: "4",
-                cost: "40",
+                costPerGbRam: 5,
             },
         },
     },
@@ -39,23 +45,27 @@ export const kubernetes: Kubernetestype = {
         size: {
             "Small (RAM: 16 GB, CPU: 4 Core)": {
                 storage: "60 GB NVMe",
+                RAM: 16,
                 dataTransfer: "6",
-                cost: "80",
+                costPerGbRam: 5,
             },
             "Medium (RAM: 32 GB, CPU: 8 Core)": {
                 storage: "80 GB NVMe",
+                RAM: 32,
                 dataTransfer: "8",
-                cost: "160",
+                costPerGbRam: 5,
             },
             "Large (RAM: 64 GB, CPU: 16 Core)": {
                 storage: "120 GB NVMe",
+                RAM: 64,
                 dataTransfer: "10",
-                cost: "320",
+                costPerGbRam: 5,
             },
             "Extra Large (RAM: 128 GB, CPU: 32 Core)": {
                 storage: "180 GB NVMe",
+                RAM: 128,
                 dataTransfer: "12",
-                cost: "640",
+                costPerGbRam: 5,
             },
         },
     },
@@ -63,47 +73,55 @@ export const kubernetes: Kubernetestype = {
         size: {
             "Small (RAM: 16 GB, CPU: 8 Core)": {
                 storage: "60 GB NVMe",
+                RAM: 16,
                 dataTransfer: "6",
-                cost: "128",
+                costPerGbRam: 8,
             },
             "Medium (RAM: 32 GB, CPU: 16 Core)": {
                 storage: "80 GB NVMe",
+                RAM: 32,
                 dataTransfer: "8",
-                cost: "256",
+                costPerGbRam: 8,
             },
             "Large (RAM: 64 GB, CPU: 32 Core)": {
                 storage: "120 GB NVMe",
+                RAM: 64,
                 dataTransfer: "10",
-                cost: "512",
+                costPerGbRam: 8,
             },
             "Extra Large (RAM: 128 GB, CPU: 64 Core)": {
                 storage: "180 GB NVMe",
+                RAM: 128,
                 dataTransfer: "12",
-                cost: "1024",
+                costPerGbRam: 8,
             },
         },
     },
     "RAM Optimized": {
         size: {
-            " Small (RAM: 16 GB, CPU: 2 Core)": {
+            "Small (RAM: 16 GB, CPU: 2 Core)": {
                 storage: "60 GB NVMe",
+                RAM: 16,
                 dataTransfer: "4",
-                cost: "72",
+                costPerGbRam: 4.5,
             },
             "Medium (RAM: 32 GB, CPU: 4 Core)": {
                 storage: "80 GB NVMe",
+                RAM: 32,
                 dataTransfer: "6",
-                cost: "144",
+                costPerGbRam: 4.5,
             },
             "Large (RAM: 64 GB, CPU: 8 Core)": {
                 storage: "120 GB NVMe",
+                RAM: 64,
                 dataTransfer: "8",
-                cost: "288",
+                costPerGbRam: 4.5,
             },
             "Extra Large (RAM: 128 GB, CPU: 16 Core)": {
                 storage: "180 GB NVMe",
+                RAM: 128,
                 dataTransfer: "10",
-                cost: "576",
+                costPerGbRam: 4.5,
             },
         },
     },

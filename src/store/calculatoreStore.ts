@@ -3,6 +3,7 @@ import { create } from 'zustand'
 import { ServiceType } from '@/data/services';
 import { devtools } from 'zustand/middleware'
 import { computeInstance, kubernetes, objectStore } from '@/data';
+import { kubernetesInstances } from '@/data/kubernetes';
 
 type FormType = {
     services: string;
@@ -82,7 +83,7 @@ export const useCalculatorStore = create<CostCalculatorState>()(
                         updatedForms[i].size = e.target.value;
                     }
 
-                    if (service === "Kubernetes") updatedForms[i].cost = kubernetes?.[updatedForms[i]?.types].size[updatedForms[i].size]?.cost;
+                    if (service === "Kubernetes") updatedForms[i].cost = kubernetes?.[updatedForms[i]?.types as kubernetesInstances].size[updatedForms[i].size]?.costPerGbRam.toString();
                     else if (service === "Compute Instance") updatedForms[i].cost = computeInstance?.[e.target.value]?.cost;
                     else if (service === "Object Store") updatedForms[i].cost = objectStore[updatedForms[i].size].cost;
                     else if (service === "Volumes") updatedForms[i].cost = (Number(updatedForms[i].size) * 0.1)

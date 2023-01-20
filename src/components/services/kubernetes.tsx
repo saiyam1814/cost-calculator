@@ -6,6 +6,7 @@ import Heading from "../ui/heading";
 import Button from "../ui/Button";
 import { shallow } from "zustand/shallow";
 import { useCalculatorStore } from "@/store/calculatoreStore";
+import { kubernetesInstances } from "@/data/kubernetes";
 
 const KubernetesForm = ({ i }: { i: number }) => {
   const {
@@ -82,34 +83,46 @@ const KubernetesForm = ({ i }: { i: number }) => {
           <option value="a">Please select</option>
           {forms[i].types !== "" ? (
             <>
-              {[...Object.keys(kubernetes?.[forms[i].types]?.size)].map(
-                (type, i) => (
-                  <option key={i} value={type}>
-                    {type}
-                  </option>
-                )
-              )}
+              {[
+                ...Object.keys(
+                  kubernetes?.[forms[i]?.types as kubernetesInstances]?.size
+                ),
+              ].map((type, i) => (
+                <option key={i} value={type}>
+                  {type}
+                </option>
+              ))}
             </>
           ) : null}
         </Select>
         {forms[i].size && forms[i].size.length > 2 ? (
           <>
             <p className="text-white font-semibold text-base">
-              Storage :
-              {kubernetes?.[forms[i]?.types].size[forms[i].size]?.storage}
+              Storage:{" "}
+              {
+                kubernetes?.[forms[i]?.types as kubernetesInstances].size[
+                  forms[i].size
+                ]?.storage
+              }
             </p>
             <p className="text-white font-semibold text-base">
               Data Transfer:{" "}
               {Number(
-                kubernetes?.[forms[i]?.types].size[forms[i].size].dataTransfer
+                kubernetes?.[forms[i]?.types as kubernetesInstances].size[
+                  forms[i].size
+                ].dataTransfer
               ) * Number(forms[i].numberOfNodes)}{" "}
               TB
             </p>
             <p className="text-white font-semibold text-lg ">
               Total Cost : $
-              {Number(
-                kubernetes?.[forms[i]?.types].size[forms[i]?.size]?.cost
-              ) * forms[i].numberOfNodes}{" "}
+              {kubernetes?.[forms[i]?.types as kubernetesInstances].size[
+                forms[i]?.size
+              ]?.costPerGbRam *
+                forms[i].numberOfNodes *
+                kubernetes?.[forms[i]?.types as kubernetesInstances].size[
+                  forms[i]?.size
+                ]?.RAM}{" "}
               per month
             </p>
           </>
