@@ -27,7 +27,7 @@ const Input = ({
         value={value}
         {...props}
       />
-      {required && value === "" ? (
+      {required && value.toString() === "NaN" ? (
         <p className="text-red-500">This Field is Required</p>
       ) : Number(value) <= 0 ? (
         <p className="text-red-500">Number should be Positive.</p>

@@ -1,34 +1,31 @@
 import { kubernetes } from "@/data";
 import Select from "../ui/Select";
 import Input from "../ui/Input";
-import { ChangeEvent } from "react";
-import { ServiceType, services } from "@/data/services";
+import { services } from "@/data/services";
 import Heading from "../ui/heading";
 import Button from "../ui/Button";
+import { shallow } from "zustand/shallow";
+import { useCalculatorStore } from "@/store/calculatoreStore";
 
-interface KubernetusFormProps {
-  forms: any;
-  i: number;
-  handleNodes: (e: ChangeEvent<HTMLInputElement>, i: number) => void;
-  handleTypeChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
-  handleServiceChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
-  handleSizeChange: (
-    e: ChangeEvent<HTMLSelectElement>,
-    i: number,
-    service: ServiceType
-  ) => void;
-  handleRemoveClick: (i: number) => void;
-}
+const KubernetesForm = ({ i }: { i: number }) => {
+  const {
+    forms,
+    handleNodes,
+    handleRemoveClick,
+    handleServiceChange,
+    handleTypeChange,
+    handleSizeChange,
+  } = useCalculatorStore((state) => {
+    return {
+      forms: state.forms,
+      handleNodes: state.handleNodes,
+      handleRemoveClick: state.handleRemoveClick,
+      handleTypeChange: state.handleTypeChange,
+      handleServiceChange: state.handleServiceChange,
+      handleSizeChange: state.handleSizeChange,
+    };
+  }, shallow);
 
-const KubernetesForm = ({
-  forms,
-  i,
-  handleNodes,
-  handleServiceChange,
-  handleTypeChange,
-  handleSizeChange,
-  handleRemoveClick,
-}: KubernetusFormProps) => {
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg">
       <div className="flex-grow">
@@ -38,7 +35,7 @@ const KubernetesForm = ({
           label="Number of Nodes : "
           type="number"
           placeholder="Enter the Number of Nodes"
-          value={forms[i].numberOfNodes}
+          value={forms[i].numberOfNodes.toString()}
           onChange={(e) => handleNodes(e, i)}
           required
         />
@@ -47,7 +44,7 @@ const KubernetesForm = ({
           label="Select a services:"
           value={forms[i].services}
           onChange={(e) => handleServiceChange(e, i)}
-          disabled={forms[i].numberOfNodes === ""}
+          disabled={forms[i].numberOfNodes === 0}
           required
         >
           <option value="">Please select</option>
@@ -95,10 +92,7 @@ const KubernetesForm = ({
             </>
           ) : null}
         </Select>
-        {forms[i].services &&
-        forms[i].types &&
-        forms[i].size &&
-        forms[i].size.length > 2 ? (
+        {forms[i].size && forms[i].size.length > 2 ? (
           <>
             <p className="text-white font-semibold text-base">
               Storage :
@@ -106,10 +100,10 @@ const KubernetesForm = ({
             </p>
             <p className="text-white font-semibold text-base">
               Data Transfer:{" "}
-              {
-               Number(kubernetes?.[forms[i]?.types].size[forms[i].size].dataTransfer) * Number(forms[i].numberOfNodes)
-              
-              }{" "}TB
+              {Number(
+                kubernetes?.[forms[i]?.types].size[forms[i].size].dataTransfer
+              ) * Number(forms[i].numberOfNodes)}{" "}
+              TB
             </p>
             <p className="text-white font-semibold text-lg ">
               Total Cost : $

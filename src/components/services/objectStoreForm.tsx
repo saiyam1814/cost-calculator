@@ -1,29 +1,20 @@
 import { objectStore, services } from "@/data";
 import Select from "../ui/Select";
-import { ServiceType } from "@/data/services";
-import { ChangeEvent } from "react";
 import Heading from "../ui/heading";
 import Button from "../ui/Button";
+import { shallow } from "zustand/shallow";
+import { useCalculatorStore } from "@/store/calculatoreStore";
 
-interface ObjectStoreProps {
-  forms: any;
-  i: number;
-  handleTypeChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
-  handleServiceChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
-  handleSizeChange: (
-    e: ChangeEvent<HTMLSelectElement>,
-    i: number,
-    service: ServiceType
-  ) => void;
-  handleRemoveClick: (i: number) => void;
-}
-const ObjectStoreForm = ({
-  forms,
-  i,
-  handleServiceChange,
-  handleSizeChange,
-  handleRemoveClick,
-}: ObjectStoreProps) => {
+const ObjectStoreForm = ({ i }: { i: number }) => {
+  const { forms, handleRemoveClick, handleServiceChange, handleSizeChange } =
+    useCalculatorStore((state) => {
+      return {
+        forms: state.forms,
+        handleRemoveClick: state.handleRemoveClick,
+        handleServiceChange: state.handleServiceChange,
+        handleSizeChange: state.handleSizeChange,
+      };
+    }, shallow);
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg">
       <div className="flex-grow">
