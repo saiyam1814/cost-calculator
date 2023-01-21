@@ -1,12 +1,12 @@
 import type { ServiceType } from "@/data/services";
 import { useCalculatorStore } from "@/store/calculatoreStore";
 import { shallow } from "zustand/shallow";
-import KubernetesForm from "@components/services/kubernetes";
-import ComputeInstanceForm from "@components/services/computeinstance";
-import ObjectStoreForm from "@components/services/objectStoreForm";
-import VolumesForm from "@components/services/volumeForm";
-import DataTransferForm from "@components/services/dataTransferForm";
-import LoadBalancerForm from "@components/services/loadBalancerForm";
+import KubernetesForm from "@/components/services-forms/kubernetes";
+import ComputeInstanceForm from "@/components/services-forms/computeinstance";
+import ObjectStoreForm from "@/components/services-forms/objectStoreForm";
+import VolumesForm from "@/components/services-forms/volumeForm";
+import DataTransferForm from "@/components/services-forms/dataTransferForm";
+import LoadBalancerForm from "@/components/services-forms/loadBalancerForm";
 import AddMenu from "../lib/AddMenu";
 import TotalCard from "./TotalCard";
 
