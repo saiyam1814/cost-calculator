@@ -1,33 +1,27 @@
 import { computeInstance, services } from "@/data";
 import Select from "../ui/Select";
-import { ChangeEvent } from "react";
-import { ServiceType } from "@/data/services";
 import Input from "../ui/Input";
 import Heading from "../ui/heading";
 import Button from "../ui/Button";
+import { useCalculatorStore } from "@/store/calculatoreStore";
+import { shallow } from "zustand/shallow";
 
-interface ComputeInstanceProps {
-  forms: any;
-  i: number;
-  handleNodes: (e: ChangeEvent<HTMLInputElement>, i: number) => void;
-  handleTypeChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
-  handleServiceChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
-  handleSizeChange: (
-    e: ChangeEvent<HTMLSelectElement>,
-    i: number,
-    service: ServiceType
-  ) => void;
-  handleRemoveClick: (i: number) => void;
-}
-
-const ComputeInstanceForm = ({
-  forms,
-  i,
-  handleNodes,
-  handleServiceChange,
-  handleSizeChange,
-  handleRemoveClick,
-}: ComputeInstanceProps) => {
+const ComputeInstanceForm = ({ i }: { i: number }) => {
+  const {
+    forms,
+    handleNodes,
+    handleRemoveClick,
+    handleServiceChange,
+    handleSizeChange,
+  } = useCalculatorStore((state) => {
+    return {
+      forms: state.forms,
+      handleNodes: state.handleNodes,
+      handleRemoveClick: state.handleRemoveClick,
+      handleServiceChange: state.handleServiceChange,
+      handleSizeChange: state.handleSizeChange,
+    };
+  }, shallow);
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg">
       <div className="flex-grow">
@@ -39,7 +33,7 @@ const ComputeInstanceForm = ({
           min="1"
           minLength={1}
           placeholder="Enter the Number of Nodes"
-          value={forms[i].numberOfNodes}
+          value={forms[i].numberOfNodes.toString()}
           onChange={(e) => handleNodes(e, i)}
         />
         <Select
@@ -76,7 +70,10 @@ const ComputeInstanceForm = ({
               Storage : {computeInstance[forms[i]?.size]?.storage}
             </p>
             <p className="text-white font-semibold text-base">
-              Data Transfer : {Number(computeInstance[forms[i]?.size]?.dataTransfer) * forms[i].numberOfNodes } {" "}TB
+              Data Transfer :{" "}
+              {Number(computeInstance[forms[i]?.size]?.dataTransfer) *
+                forms[i].numberOfNodes}{" "}
+              TB
             </p>
             <p className="text-white font-semibold text-lg mb-5 ">
               Total Cost : $

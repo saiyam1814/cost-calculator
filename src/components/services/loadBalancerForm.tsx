@@ -1,25 +1,22 @@
-import { ChangeEvent } from "react";
 import Select from "../ui/Select";
 import { services } from "@/data";
 import Input from "../ui/Input";
 import Heading from "../ui/heading";
 import Button from "../ui/Button";
+import { useCalculatorStore } from "@/store/calculatoreStore";
+import { shallow } from "zustand/shallow";
 
-type LoadBalncerProps = {
-  forms: any;
-  i: number;
-  handleServiceChange: (e: ChangeEvent<HTMLSelectElement>, i: number) => void;
-  handleRemoveClick: (i: number) => void;
-  handleNodes: (e: ChangeEvent<HTMLInputElement>, i: number) => void;
-};
+const LoadBalancerForm = ({ i }: { i: number }) => {
+  const { forms, handleNodes, handleRemoveClick, handleServiceChange } =
+    useCalculatorStore((state) => {
+      return {
+        forms: state.forms,
+        handleNodes: state.handleNodes,
+        handleRemoveClick: state.handleRemoveClick,
+        handleServiceChange: state.handleServiceChange,
+      };
+    }, shallow);
 
-const LoadBalancerForm = ({
-  forms,
-  i,
-  handleServiceChange,
-  handleRemoveClick,
-  handleNodes,
-}: LoadBalncerProps) => {
   return (
     <div className="flex flex-col border-2 p-2 rounded-lg min-h-[300px]">
       <div className="flex-grow">
@@ -29,7 +26,7 @@ const LoadBalancerForm = ({
           label="Number of Nodes : "
           type="number"
           placeholder="Enter the Number of Nodes"
-          value={forms[i].numberOfNodes}
+          value={forms[i].numberOfNodes.toString()}
           onChange={(e) => handleNodes(e, i)}
           required
         />
