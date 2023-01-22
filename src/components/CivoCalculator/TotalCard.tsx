@@ -43,7 +43,7 @@ const TotalCard = () => {
   );
   const totalCost = forms
     .reduce((acc, el) => {
-      let cost = Number(el.cost || 0) * el.numberOfNodes;
+      let cost = Number((Number(el.cost || 0) * el.numberOfNodes).toFixed(2)); // we are rounding to 2 deciaml place to avoid dcimal number like 12.042561
       if (el.services === "Kubernetes") {
         switch (el.types) {
           case "Standard":
